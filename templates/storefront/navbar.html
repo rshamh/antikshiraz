@@ -1,0 +1,40 @@
+{% for nav in navbar %}
+    {% if nav.title == 'محصولات' %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="{% url 'storefront:all-products' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            محصولات
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for cat in category %}
+                    {% if cat.parent == None %}
+                        {% if cat.children.all %}
+                            <li class="has-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="{% url 'storefront:category' cat.slug %}">{{cat.title}}<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left nav-arrow" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg></a>
+                                <div class="row megasubmenu dropdown-menu ">
+                                    <ul class="list-group list-group-flush flex-row flex-wrap ">
+                                        {% for cat in cat.children.all %}
+                                        <li class="col-6 list-group-item "><a class="nav-link active" href="{% url 'storefront:category' cat.slug %}">{{cat.title}}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="{% url 'storefront:category' cat.slug %}">{{cat.title}}</a></li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}  
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'storefront:all-products' %}">همه محصولات</a></li>
+            </ul>
+        </li>
+    {% elif nav.position == 1 %}
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href={% url 'storefront:index' %}>{{nav.title}}</a> 
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href={% url 'storefront:index' %}>{{nav.title}}</a> 
+        </li>
+    {% endif %}
+{% endfor %}
+
