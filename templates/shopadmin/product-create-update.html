@@ -1,0 +1,47 @@
+{% extends 'shopadmin/base.html' %}
+{% comment %} {% load static %} {% endcomment %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% block title-meta %}افزودن محصول{% endblock  %}{% endblock  %}
+
+{% block content %}
+    <section class="content">
+        <div class="container-fluid">
+    
+    
+            <!-- Create Vew -->
+            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="row">
+                    <div class="col-6">
+                        {{ form.title|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ form.slug|as_crispy_field }}
+                    </div>
+                        <div class="col-12">
+                            {{ form.description|as_crispy_field }}
+                        </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-6">
+                                {{ form.thumbnail|as_crispy_field }}
+                                {{ form.publish|as_crispy_field }}
+                                {{ form.status|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.price|as_crispy_field }}
+                                {{ form.amount|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        {{ form.category|as_crispy_field }}
+                    </div>
+                    <button type="submit" class="btn btn-success">ذخیره</button>
+                </div>
+            </form>
+
+        </div><!-- /.container-fluid -->
+    </section>
+
+{% endblock  %}

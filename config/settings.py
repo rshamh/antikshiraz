@@ -38,8 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'widget_tweaks',
+    'crispy_forms',
+    # "crispy_bootstrap5",
     'Extensions',
     'storefront.apps.StorefrontConfig',
+    'customers.apps.CustomersConfig',
+    'shopadmin.apps.ShopadminConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart_info'
             ],
         },
     },
@@ -131,3 +138,19 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Redirects
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "customers:login"
+LOGOUT_REDIRECT_URL = "storefront:index"
+
+
+
+
+# Extensions:
+# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+
+AUTH_USER_MODEL = 'customers.User'

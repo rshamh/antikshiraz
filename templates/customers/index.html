@@ -1,0 +1,9 @@
+{% extends 'storefront/base.html' %}
+
+{% block content  %}
+    {% if user.get_full_name %}
+        <h1>سلام {{user.get_short_name}}</h1>
+    {% else %}
+        <h1>سلام {{user.username}}</h1>
+    {% endif %}
+{% endblock  %}

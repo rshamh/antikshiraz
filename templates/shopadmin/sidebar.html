@@ -1,0 +1,129 @@
+{% load static %}
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{% url 'shopadmin:index' %}" class="brand-link bg-dark">
+      <img src="/media/site/white2.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">پنل مدیریت</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar" style="direction: ltr">
+      <div style="direction: rtl">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="https://www.gravatar.com/avatar/52f0fbcbedee04a121cba8dad1174462?s=200&d=mm&r=g" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block">{{user.get_full_name}}</a>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+
+            <li class="nav-item ">
+              <a href="{% url 'shopadmin:index' %} " class="nav-link active">
+                <i class="nav-icon fa-solid fa-gauge"></i>
+                <p>
+                  داشبورد
+                  {% comment %} <span class="right badge badge-danger">جدید</span> {% endcomment %}
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'shopadmin:products' %} " class="nav-link">
+                <i class="nav-icon fa-solid fa-store"></i>
+                <p>
+                  محصولات
+                  {% comment %} <span class="right badge badge-danger">جدید</span> {% endcomment %}
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'shopadmin:index' %} " class="nav-link">
+                <i class="nav-icon fa-solid fa-cart-shopping"></i>
+                <p>
+                  سفارشات
+                  {% comment %} <span class="right badge badge-danger">جدید</span> {% endcomment %}
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'shopadmin:customers' %} " class="nav-link">
+                <i class="nav-icon fa-solid fa-users"></i>
+                <p>
+                  کاربران
+                  {% comment %} <span class="right badge badge-danger">جدید</span> {% endcomment %}
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'shopadmin:index' %} " class="nav-link">
+                {% comment %} <i class="nav-icon fa fa-dashboard"></i> {% endcomment %}
+                {% comment %} <i class="fa fa-truck-fast"></i> {% endcomment %}
+                <i class="nav-icon fa-solid fa-truck-fast"></i>
+                <p>
+                  ارسال
+                  {% comment %} <span class="right badge badge-danger">جدید</span> {% endcomment %}
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa-solid fa-gear"></i>
+                <p>
+                  تنظیمات
+                  <i class="right fa fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="./index.html" class="nav-link">
+                    <i class="nav-icon fa-solid fa-images"></i>
+                    <p>اسلایدشو</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="./index2.html" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>تنظیم دوم</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="./index3.html" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>تنظیم سوم</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <hr>
+          </ul>
+
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+            <h4 class="nav-title">لینک ها</h4>
+            <li class="nav-item ">
+              <a href="{% url 'storefront:index' %}" target="_blank" class="nav-link">
+                <i class="nav-icon fa-solid fa-house"></i>
+                <p>
+                  وب سایت
+                </p>
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+    </div>
+    <!-- /.sidebar -->
+  </aside>

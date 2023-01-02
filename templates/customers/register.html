@@ -1,0 +1,124 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block style %}
+    {% comment %} <link rel="stylesheet" href="{% static 'css/login.css' %}"> {% endcomment %}
+{% endblock  %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-2 mt-4">
+                <h2 class="heading-section">ثبت نام</h2>
+            </div>
+        </div>
+    </div>
+
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger shadow-sm w-75 m-auto text-center" role="alert">
+            {% for error in form.non_field_errors %}
+                {{error}}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <section class="container rounded-3 shadow-lg w-75 my-5">
+        
+
+        <div class="row m-auto">
+
+            <div class='col-6 w-50 p-5'>
+
+                <div class="d-flex">
+                    <div class="w-100">
+                        <h3 class="mb-4">ثبت نام</h3>
+                    </div>
+                    <div class="w-100">
+                        <p class="social-media d-flex justify-content-end">
+                            <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                            <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                        </p>
+                    </div>
+                </div>
+
+                <form method="post">{% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">نام کاربری</label>
+                        {{form.username|add_class:"form-control form-control-lg"}}
+                        {% if form.username.errors %}
+                            <div class="alert alert-danger m-auto text-center mt-2" role="alert">
+                                {% for error in form.username.errors %}
+                                    {{error}}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                      {% comment %} <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp"> {% endcomment %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">ایمیل</label>
+                        {{form.email|add_class:"form-control form-control-lg"}}
+                        {% if form.email.errors %}
+                            <div class="alert alert-danger m-auto text-center mt-2" role="alert">
+                                {% for error in form.email.errors %}
+                                    {{error}}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                      {% comment %} <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp"> {% endcomment %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">رمز عبور</label>
+                        {{form.password1|add_class:"form-control form-control-lg"}}
+                        {% if form.password1.errors %}
+                            <div class="alert alert-danger m-auto text-center mt-2" role="alert">
+                                {% for error in form.password1.errors %}
+                                    {{error}}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                      {% comment %} <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"> {% endcomment %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword2" class="form-label">تکرار رمز عبور</label>
+                        {{form.password2|add_class:"form-control form-control-lg"}}
+                        {% if form.password2.errors %}
+                            <div class="alert alert-danger m-auto text-center mt-2" role="alert">
+                                {% for error in form.password2.errors %}
+                                    {{error}}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                      {% comment %} <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"> {% endcomment %}
+                    </div>
+                    
+                    <div class="row mb-5">
+                        <div class="col-6 form-check">
+                            <label class="form-check-label" for="exampleCheck1">مرا بخاطر بسپار</label>
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-lg btn-secondary">ثبت نام</button>
+                    </div>
+                    <p class="text-center mt-4 mb-0">حساب کاربری دارید؟ <a class="text-secondary" data-toggle="tab" href="{% url 'customers:login' %}">وارد شوید</a></p>
+                </form>
+
+
+            </div>
+
+            <div class="col-6 w-50 m-auto">
+                <img src="/media/site/login.jpg" class="mw-100">
+                <!-- <h1>Hello</h1> -->
+            </div>
+        </div>
+
+
+    </section>
+
+
+    
+{% endblock  %}

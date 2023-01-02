@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from Extensions.utils import jalali_converter, persian_number_conv
 from django.utils.html import format_html
+from django.urls import reverse
 
 
 # Managers:
@@ -57,10 +58,11 @@ class SlideShow(models.Model):
 class Category(models.Model):
     parent = models.ForeignKey('self', default=None, null=True, blank=True, on_delete=models.SET_NULL, related_name='children', verbose_name='زیردسته')
     title = models.CharField(max_length=100, verbose_name='عنوان دسته بندی')
-    slug = models.SlugField(max_length=30, unique=True, verbose_name='آدرس دسته بندی')
+    slug = models.SlugField(max_length=30, unique=True, verbose_name='آدرس دسته بندی', allow_unicode = True)
     status = models.BooleanField(default=True, verbose_name='وضعیت انتشار')
     position = models.IntegerField(verbose_name='موقعیت')
     
+
     class Meta:
         verbose_name = 'دسته بندی'
         verbose_name_plural = 'دسته بندی ها'
@@ -78,7 +80,7 @@ class Product(models.Model):
     )
 
     title = models.CharField(max_length=100, verbose_name='عنوان محصول')
-    slug = models.SlugField(max_length=30, unique=True, verbose_name='آدرس محصول')
+    slug = models.SlugField(max_length=30, unique=True, verbose_name='آدرس محصول', allow_unicode = True)
     category = models.ManyToManyField(Category, verbose_name='دسته بندی', name='category', related_name='products')
     description = models.TextField(verbose_name='توضیحات')
     thumbnail = models.ImageField(upload_to='images', verbose_name='عکس')
@@ -86,7 +88,7 @@ class Product(models.Model):
     publish = models.DateTimeField(default=timezone.now, verbose_name='زمان انتشار')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    amount = models.IntegerField(default=1, verbose_name='تعداد موجود')
+    stock = models.IntegerField(default=1, verbose_name='تعداد موجود')
     status = models.BooleanField(default=True, verbose_name='وضعیت انتشار')
 
     
@@ -97,6 +99,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("shopadmin:products")
+    
 
     def jpublish(self):
         return jalali_converter(self.publish)
@@ -121,6 +127,14 @@ class Product(models.Model):
         return format_html(f"<img width=60px height=60px style='border-radius: 5px;' src='{self.thumbnail.url}'")
     thumbnail_tag.short_description = 'عکس'
 
+    def is_available(self):
+        if self.stock > 0:
+            return True
+        else:
+            return False
+    is_available.boolean = True
+    is_available.short_description = 'موجودی'
+    
     # obejcts = PublishedManager()
 
     # @property

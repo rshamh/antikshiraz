@@ -6,7 +6,7 @@ from django.utils.translation import ngettext
 
 # Products
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('thumbnail_tag', 'title', 'slug', 'jpublish', 'status', 'category_to_str')
+    list_display = ('thumbnail_tag', 'title', 'slug', 'jpublish', 'status', 'is_available', 'stock', 'category_to_str')
     list_display_links = ('thumbnail_tag', 'title',)
     list_filter = ('publish', 'status')
     search_fields = ('description', 'title')

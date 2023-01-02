@@ -1,0 +1,192 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block style %}
+    {% comment %} <link rel="stylesheet" href="{% static 'css/login.css' %}"> {% endcomment %}
+{% endblock  %}
+
+{% block content %}
+{% comment "" %}
+<section class="ftco-section">
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">ورود به سایت</h2>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex">
+                
+                    
+                    <div class="login-wrap p-4 p-md-5">
+
+                        <!-- Title and Social Networks -->
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h3 class="mb-4">ورود</h3>
+                            </div>
+                            <div class="w-100">
+                                <p class="social-media d-flex justify-content-end">
+                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Form -->
+                        <form action="#" class="signin-form">
+                        
+                            <div class="form-group mb-3">
+                                <label class="label" for="name">نام کاربری</label>
+                                <input type="text" class="form-control" placeholder="Username" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="password">رمز عبور</label>
+                                <input type="password" class="form-control" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">ورود</button>
+                            </div>
+
+                            <div class="form-group d-md-flex">
+                                <div class="w-50 text-right">
+                                    <label class="checkbox-wrap checkbox-primary mb-0">مرا به خاطر بسپار
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div> 
+
+                                <div class="form-check w-50 checkbox-primary ">
+                                    <label class="form-check-label checkbox-wrap checkbox-primary" for="flexCheckChecked">مرا به خاطر بسپار</label>
+                                    <input class="form-check-input ms-2 checkbox-primary" type="checkbox" value="" id="flexCheckChecked" checked>
+                                </div>
+                                
+                                <div class="w-50 text-md-left">
+                                    <a href="#">فراموشی رمز عبور</a>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <!-- Sign Up -->
+                        <p class="text-center">حساب کاربری نداری؟ <a data-toggle="tab" href="#signup">ثبت نام کنید</a></p>
+                    </div>
+
+
+                    <!-- Image -->
+                    <div class="img" style="background-image: url(/media/site/login.jpg);"></div>
+
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</section>
+<script src="{% static 'javascripts/login/jquery.min.js' %}"></script>
+<script src="{% static 'javascripts/login/popper.js' %}"></script>
+<script src="{% static 'javascripts/login/bootstrap.min.js' %}"></script>
+<script src="{% static 'javascripts/login/main.js' %}"></script>
+
+{% endcomment %}
+
+
+
+ 
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-2 mt-4">
+                <h2 class="heading-section">ورود به سایت</h2>
+            </div>
+        </div>
+    </div>
+
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger shadow-sm w-75 m-auto text-center" role="alert">
+            {% for error in form.non_field_errors %}
+                {{error}}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <section class="container rounded-3 shadow-lg w-75 my-5">
+        
+
+        <div class="row m-auto">
+
+            <div class='col-6 w-50 p-5'>
+
+                <div class="d-flex">
+                    <div class="w-100">
+                        <h3 class="mb-4">ورود</h3>
+                    </div>
+                    <div class="w-100">
+                        <p class="social-media d-flex justify-content-end">
+                            <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                            <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                        </p>
+                    </div>
+                </div>
+                
+
+                <form method="post">{% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">نام کاربری</label>
+                        {{form.username|add_class:"form-control form-control-lg"}}
+                        {% if form.username.errors %}
+                            <div class="alert alert-danger m-auto text-center mt-2" role="alert">
+                                {% for error in form.username.errors %}
+                                    {{error}}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                      {% comment %} <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp"> {% endcomment %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">نام کاربری</label>
+                        {{form.password|add_class:"form-control form-control-lg"}}
+                        {% if form.password.errors %}
+                            <div class="alert alert-danger m-auto text-center mt-2" role="alert">
+                                {% for error in form.password.errors %}
+                                    {{error}}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                      {% comment %} <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"> {% endcomment %}
+                    </div>
+                    
+
+                    <div class="row mb-5">
+                        <div class="col-6 form-check">
+                            <label class="form-check-label" for="exampleCheck1">مرا بخاطر بسپار</label>
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        </div>
+    
+                        <div class=" col-6 text-end ">
+                            <a class="text-secondary text-decoration-none" href="#">فراموشی رمز عبور</a>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-lg btn-secondary">ورود</button>
+                    </div>
+                </form>
+
+                <p class="text-center mt-4 mb-0">حساب کاربری نداری؟ <a class="text-secondary" data-toggle="tab" href="{% url 'customers:register' %}">ثبت نام کنید</a></p>
+
+            </div>
+
+            <div class="col-6 w-50 m-auto">
+                <img src="/media/site/login.jpg" class="mw-100">
+                <!-- <h1>Hello</h1> -->
+            </div>
+        </div>
+
+
+    </section>
+
+
+    
+{% endblock  %}

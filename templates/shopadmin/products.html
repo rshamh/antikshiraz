@@ -1,0 +1,152 @@
+{% extends 'shopadmin/base.html' %}
+{% load static %}
+
+{% block title %}{% block title-meta %}محصولات{% endblock  %}{% endblock  %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+  
+  
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info p-2">
+                    <div class="inner">
+                        <h3>{{all_products_count}}</h3>
+                        <p>کل محصولات</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success p-2">
+                    <div class="inner">
+                        <h3>{{available_products_count}}</h3>
+                        <p>کل موجودی</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>44</h3>
+    
+                    <p>کاربران ثبت شده</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>65</h3>
+    
+                    <p>بازدید جدید</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-2 float-right">
+                <a href="{% url 'shopadmin:product-create' %}"><button type="button" class="btn btn-block btn-outline-primary btn-lg"><i class="fa-solid fa-plus fs-5"></i>  ثبت محصول</button></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">کل محصولات</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 300px;">
+                                <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover">
+                            <tr>
+                                <th style="width: 60px">کد</th>
+                                <th style="width: 60px">تصویر</th>
+                                <th>عنوان محصول</th>
+                                <th style="width: 100px">قیمت</th>
+                                <th>دسته بندی</th>
+                                <th style="width: 100px">موجودی</th>
+                                <th style="width: 100px">وضعیت نمایش</th>
+                                <th style="width: 100px">نمایش </th>
+                            </tr>
+                            {% for product in product_list %}
+                                <tr>
+                                    <td>{{product.pk}}</td>
+                                    <td><img src="{{product.thumbnail.url}}" width="50px" height="50px" class="rounded"></td>
+                                    <td><a href="{{product.slug}}">{{product.p_title}}</a></td>
+                                    <td>{{product.p_price}}</td>
+                                    <td>
+                                        {% for cat in product.category.all %}
+                                            <span class="badge badge-secondary">{{cat}}</span>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {% if product.stock > 0 %}
+                                            <span class="text-success">{{product.stock}}</span>
+                                        {% else %}
+                                            <span class="text-danger">{{product.stock}}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if product.status %}
+                                            <i class="icon fa-solid fa-check text-success rounded-circle p-1"></i>
+                                        {% else %}
+                                            <i class="icon fa-solid fa-xmark text-danger rounded-circle p-1"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'storefront:product-detail' product.slug %} "class="text-secondary" target="_blank">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+                            
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div><!-- /.row -->
+
+    </div><!-- /.container-fluid -->
+</section>
+
+{% endblock  %}

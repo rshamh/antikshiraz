@@ -18,18 +18,25 @@ body{
     /* background-color: #F1F3F5 !important; */
     background-color: #ECEFF1 !important;
     font-family: "Shabnam" !important;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 footer {
     text-align: center;
     padding-top: 25px;
     padding-bottom: 10px;
-    background-color: rgb(212, 217, 223);
+    background-color: rgb(27, 28, 31);
     color: white;
 }
 
 .shopping-cart {
     background-color: #CFD8DC;
+}
+
+.shopping-cart:hover {
+    background-color: #FFCDD2 !important;
 }
 
 
@@ -57,12 +64,16 @@ div.detail-img img {
     transition-delay: 0s;
 }
 
-.nav-detail a:hover{
+.nav-detail a:hover {
     color: #606CEC;
 }
 
-.nav-link{
+.nav-link.active {
     font-weight: 400 !important;
+    font-size: 1.1rem !important;
+}
+.nav-h a:hover {
+    color: #E74C3C !important;
 }
 
 .price-tag span{
@@ -133,3 +144,23 @@ div.detail-img img {
     top: 3px;
 }
 /* ============ desktop view .end// ============ */
+
+
+.form-check {
+    padding-right: 2.5em !important;
+
+}
+
+.form-check .form-check-input {
+    float: none !important;
+    margin-right: 0.5em !important;
+}
+
+.form-check .form-check-label {
+    float: right !important;
+    margin-right: -1.5em;
+}
+
+.nav-detail a, li {
+    color: black !important;
+}
