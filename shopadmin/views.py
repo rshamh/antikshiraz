@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView
 from storefront.models import Product
+from django.db.models import Q
 
 @login_required
 def index(request):
@@ -40,3 +41,16 @@ class CustomerListView(LoginRequiredMixin, ListView):
     template_name = 'shopadmin/customers.html'
     # paginate_by = 8
     context_object_name = 'customer_list'
+
+
+def search(request):
+    context={}
+    if 'table_search' in request.GET:
+        keyword = request.GET['table_search']
+        if keyword:
+            products = Product.objects.filter(Q(title__icontains=keyword) | Q(description__icontains=keyword))
+
+            context={
+                'product_list': products
+            }
+    return render(request, 'shopadmin/products.html', context)

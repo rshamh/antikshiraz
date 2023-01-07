@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <meta name="generator" content="ShirazAntik">
     {% block style %}{% endblock  %}
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="{% logo %}" />
     <!-- my css style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="screen">
     <!-- Bootstrap CSS -->
@@ -44,12 +46,18 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
               </form> -->
+              <form action="{% url 'storefront:search' %}" class="d-flex me-5" method="GET" role="search" style="height: 3rem; width: 30%">
+                <input class="form-control me-2 " type="search" placeholder="جستجوی محصول..." aria-label="Search" name="keyword">
+                <button class="btn btn-outline-success" type="submit">جستجو</button>
+              </form>
               <div class="nav-register">
-                  <span class="mx-3 "><a class="nv-w navbar-brand shopping-cart rounded-pill px-4 py-2 position-relative" href="{% url 'cart:index' %}"><i class="fa-solid fa-cart-shopping"></i> <span>سبد خرید</span>
-                    <span class="position-absolute top-0 start-20 translate-middle badge rounded-pill bg-danger">
-                      {{cart_quantity|persian_intcomma|persian_number}}
-                    </span>
-                  </a></span>
+
+                <span class="mx-3 "><a class="nv-w navbar-brand shopping-cart rounded-pill px-4 py-2 position-relative" href="{% url 'cart:index' %}"><i class="fa-solid fa-cart-shopping"></i> <span>سبد خرید</span>
+                  <span class="position-absolute top-0 start-20 translate-middle badge rounded-pill bg-danger">
+                    {{cart_quantity|persian_intcomma|persian_number}}
+                  </span>
+                </a></span>
+
                   {% if user.is_authenticated %}
                     {% if user.is_superuser %}
                       <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'shopadmin:index' %}">پنل مدیریت</a></span>

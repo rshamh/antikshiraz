@@ -24,6 +24,11 @@
                                 </div>
                             </div>
                         </div>
+                    {% empty %}
+                        <h2 class="text-center mt-5">محصولی برای نمایش یافت نشد</h2>
+                        <div class="text-center mt-4">
+                            <a href="{% url 'storefront:index' %}" class="btn btn-secondary btn-block">صفحه اصلی &nbsp<i class="bi bi-box-arrow-up-left"></i></a>
+                        </div>
                     {% endfor %}
                 </div>
             </div>

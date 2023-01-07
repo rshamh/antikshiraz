@@ -4,8 +4,7 @@ from .models import Cart, CartItem
 
 # Carts
 class CartAdmin(admin.ModelAdmin):
-    pass
-    list_display = ('cart_id', 'date_added')
+    list_display = ('cart_id', 'cart_user', 'cart_items', 'date_added')
     # list_display_links = ('thumbnail_tag', 'title',)
     # list_filter = ('publish', 'status')
     # search_fields = ('description', 'title')
@@ -17,8 +16,7 @@ admin.site.register(Cart, CartAdmin)
 
 # Cart Items
 class CartItemAdmin(admin.ModelAdmin):
-    pass
-    list_display = ('product', 'cart', 'quantity', 'is_active')
+    list_display = ('product', 'cart', 'user_of_cart', 'quantity', 'is_active')
     # list_display_links = ('thumbnail_tag', 'title',)
     # list_filter = ('publish', 'status')
     # search_fields = ('description', 'title')

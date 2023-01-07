@@ -83,11 +83,14 @@
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 300px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
+                                <form action="{% url 'shopadmin:search' %}"  method="GET" role="search" class="d-flex">
 
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                </div>
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -104,38 +107,40 @@
                                 <th style="width: 100px">وضعیت نمایش</th>
                                 <th style="width: 100px">نمایش </th>
                             </tr>
-                            {% for product in product_list %}
-                                <tr>
-                                    <td>{{product.pk}}</td>
-                                    <td><img src="{{product.thumbnail.url}}" width="50px" height="50px" class="rounded"></td>
-                                    <td><a href="{{product.slug}}">{{product.p_title}}</a></td>
-                                    <td>{{product.p_price}}</td>
-                                    <td>
-                                        {% for cat in product.category.all %}
-                                            <span class="badge badge-secondary">{{cat}}</span>
-                                        {% endfor %}
-                                    </td>
-                                    <td>
-                                        {% if product.stock > 0 %}
-                                            <span class="text-success">{{product.stock}}</span>
-                                        {% else %}
-                                            <span class="text-danger">{{product.stock}}</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if product.status %}
-                                            <i class="icon fa-solid fa-check text-success rounded-circle p-1"></i>
-                                        {% else %}
-                                            <i class="icon fa-solid fa-xmark text-danger rounded-circle p-1"></i>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        <a href="{% url 'storefront:product-detail' product.slug %} "class="text-secondary" target="_blank">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                            {% if product_list %}
+                                {% for product in product_list %}
+                                    <tr>
+                                        <td>{{product.pk}}</td>
+                                        <td><img src="{{product.thumbnail.url}}" width="50px" height="50px" class="rounded"></td>
+                                        <td><a href="{{product.slug}}">{{product.p_title}}</a></td>
+                                        <td>{{product.p_price}}</td>
+                                        <td>
+                                            {% for cat in product.category.all %}
+                                                <span class="badge badge-secondary">{{cat}}</span>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% if product.stock > 0 %}
+                                                <span class="text-success">{{product.stock}}</span>
+                                            {% else %}
+                                                <span class="text-danger">{{product.stock}}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if product.status %}
+                                                <i class="icon fa-solid fa-check text-success rounded-circle p-1"></i>
+                                            {% else %}
+                                                <i class="icon fa-solid fa-xmark text-danger rounded-circle p-1"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'storefront:product-detail' product.slug %} "class="text-secondary" target="_blank">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
                             
                             
                         </table>

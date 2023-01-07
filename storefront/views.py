@@ -3,6 +3,9 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
 from Extensions.utils import persian_number_conv
 from django.views.generic import ListView, DetailView
+from cart.models import CartItem
+from cart.views import _cart_id
+from django.db.models import Q
 
 def index(request):
     last_products = Product.objects.filter(status=True)[:8]
@@ -25,8 +28,15 @@ class ProductDetailView(DetailView):
     context_object_name = 'product' # Default name
 
     def get_object(self):
+        global product
         slug = self.kwargs.get('slug')
-        return get_object_or_404(Product.objects.filter(status=True),  slug=slug)           #TODO Should I add status=True ?
+        product = get_object_or_404(Product.objects.filter(status=True),  slug=slug) #TODO Should I add status=True ?
+        return product          
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['in_cart'] = CartItem.objects.filter(cart__cart_id=_cart_id(self.request), product=product).exists()
+        return context
 
 
 # def products(request):
@@ -75,3 +85,15 @@ class CategoryListView(ListView):
         context['category'] = category
         return context
     
+
+def search(request):
+    context={}
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            products = Product.objects.filter(Q(status=True) & Q(title__icontains=keyword) | Q(description__icontains=keyword))
+
+            context={
+                'product_list': products
+            }
+    return render(request, 'storefront/all_products.html', context)
