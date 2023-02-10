@@ -29,7 +29,7 @@
       
 
         <!-- navbar -->
-      <nav class="navbar navbar-expand-lg navbar-light pt-4 py-3 ">
+      <nav class="navbar navbar-expand-xl navbar-light pt-4 py-3 ">
           <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'storefront:index' %}"><img src="{% logo %}" alt="ShirazAntik" width="75" height="75"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,20 +60,20 @@
 
                   {% if user.is_authenticated %}
                     {% if user.is_superuser %}
-                      <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'shopadmin:index' %}">پنل مدیریت</a></span>
+                      <span class="nav-h"><a target="_blank" class="nv-w navbar-brand" href="{% url 'shopadmin:index' %}">پنل مدیریت</a></span>
                       <span class="mx-2">|</span>
                     {% endif %}
                     {% if user.get_full_name %}
-                      <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'customers:index' %}">{{user.get_full_name}}</a></span>
+                      <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'accounts:index' %}">{{user.get_full_name}}</a></span>
                     {% else %}
-                      <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'customers:index' %}">{{user.username}}</a></span>
+                      <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'accounts:index' %}">{{user.phone_number|persian_number}}</a></span>
                     {% endif %}
                     <span class="mx-2">|</span>
-                    <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'customers:logout' %} ">خروج</a></span>
+                    <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'accounts:logout' %} ">خروج</a></span>
                   {% else %}
-                    <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'customers:register' %}">عضویت</a></span>
+                    <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'accounts:register' %}">عضویت</a></span>
                     <span class="mx-2">|</span>
-                    <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'customers:login' %} ">وارد شوید</a></span>
+                    <span class="nav-h"><a class="nv-w navbar-brand" href="{% url 'accounts:login' %} ">وارد شوید</a></span>
                   {% endif %}
                 </div>
             </div>

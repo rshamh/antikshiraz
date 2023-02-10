@@ -196,3 +196,7 @@ div.detail-img img {
 .nav-detail a, li {
     color: black !important;
 }
+
+a.list-group-item-action:hover {
+    background-color: #faf8f8;
+}

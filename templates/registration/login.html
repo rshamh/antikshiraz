@@ -133,7 +133,7 @@
 
                 <form method="post">{% csrf_token %}
                     <div class="mb-3">
-                        <label for="username" class="form-label">نام کاربری</label>
+                        <label for="username" class="form-label">شماره تماس</label>
                         {{form.username|add_class:"form-control form-control-lg"}}
                         {% if form.username.errors %}
                             <div class="alert alert-danger m-auto text-center mt-2" role="alert">
@@ -146,7 +146,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">نام کاربری</label>
+                        <label for="exampleInputPassword1" class="form-label">رمز عبور</label>
                         {{form.password|add_class:"form-control form-control-lg"}}
                         {% if form.password.errors %}
                             <div class="alert alert-danger m-auto text-center mt-2" role="alert">
@@ -174,7 +174,7 @@
                     </div>
                 </form>
 
-                <p class="text-center mt-4 mb-0">حساب کاربری نداری؟ <a class="text-secondary" data-toggle="tab" href="{% url 'customers:register' %}">ثبت نام کنید</a></p>
+                <p class="text-center mt-4 mb-0">حساب کاربری نداری؟ <a class="text-secondary" data-toggle="tab" href="{% url 'accounts:register' %}">ثبت نام کنید</a></p>
 
             </div>
 

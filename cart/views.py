@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from storefront.models import Product
 from .models import Cart, CartItem
-from customers.models import User
+from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse

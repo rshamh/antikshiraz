@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-tgc4r%5!b3&b==)xhufsgzpux&#h9%@nff+m6z4lqyx5p8s2aq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     # "crispy_bootstrap5",
     'Extensions',
     'storefront.apps.StorefrontConfig',
-    'customers.apps.CustomersConfig',
+    'accounts.apps.AccountsConfig',
     'shopadmin.apps.ShopadminConfig',
     'cart.apps.CartConfig',
 ]
@@ -142,7 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirects
 LOGIN_REDIRECT_URL = "/"
-LOGIN_URL = "customers:login"
+LOGIN_URL = "accounts:login"
 LOGOUT_REDIRECT_URL = "storefront:index"
 
 
@@ -153,4 +153,4 @@ LOGOUT_REDIRECT_URL = "storefront:index"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 
-AUTH_USER_MODEL = 'customers.User'
+AUTH_USER_MODEL = 'accounts.User'

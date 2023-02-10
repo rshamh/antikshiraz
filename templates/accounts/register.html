@@ -44,18 +44,18 @@
 
                 <form method="post">{% csrf_token %}
                     <div class="mb-3">
-                        <label for="username" class="form-label">نام کاربری</label>
-                        {{form.username|add_class:"form-control form-control-lg"}}
-                        {% if form.username.errors %}
+                        <label for="username" class="form-label">شماره تماس</label>
+                        {{form.phone_number|add_class:"form-control form-control-lg"}}
+                        {% if form.phone_number.errors %}
                             <div class="alert alert-danger m-auto text-center mt-2" role="alert">
-                                {% for error in form.username.errors %}
+                                {% for error in form.phone_number.errors %}
                                     {{error}}
                                 {% endfor %}
                             </div>
                         {% endif %}
                       {% comment %} <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp"> {% endcomment %}
                     </div>
-
+                    <!--
                     <div class="mb-3">
                         <label for="email" class="form-label">ایمیل</label>
                         {{form.email|add_class:"form-control form-control-lg"}}
@@ -68,7 +68,7 @@
                         {% endif %}
                       {% comment %} <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp"> {% endcomment %}
                     </div>
-
+                    -->
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">رمز عبور</label>
                         {{form.password1|add_class:"form-control form-control-lg"}}
@@ -104,7 +104,7 @@
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <button type="submit" class="btn btn-lg btn-secondary">ثبت نام</button>
                     </div>
-                    <p class="text-center mt-4 mb-0">حساب کاربری دارید؟ <a class="text-secondary" data-toggle="tab" href="{% url 'customers:login' %}">وارد شوید</a></p>
+                    <p class="text-center mt-4 mb-0">حساب کاربری دارید؟ <a class="text-secondary" data-toggle="tab" href="{% url 'accounts:login' %}">وارد شوید</a></p>
                 </form>
 
 
