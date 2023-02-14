@@ -1,24 +1,22 @@
-{% extends 'storefront/base.html' %}
+{% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
 
-{% block content  %}
-    {% if user.get_full_name %}
-        <h1 class="my-4">سلام {{user.get_short_name}}</h1>
-    {% else %}
-        <h1 class="my-4">سلام {{user.phone_number}}</h1>
-    {% endif %}
-
-    <div class="row mt-2">
-        <div class="col-3 " >
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action p-3 fs-5" aria-current="true">مشخصات کاربری</a>
-                <a href="#" class="list-group-item list-group-item-action p-3 fs-5">سفارشات</a>
-                <a href="#" class="list-group-item list-group-item-action p-3 fs-5">تغییر رمز عبور</a>
-                <a href="#" class="list-group-item list-group-item-action p-3 fs-5">A fourth item</a>
-                <a href="#" class="list-group-item list-group-item-action p-3 fs-5">And a fifth one</a>
+{% block content_account %}
+    <form method='post'>{% csrf_token %}
+        <div class='row'>
+            <div class='col-6 '>
+                {{ form.username|as_crispy_field }}
+            </div>
+            <div class='col-6'>
+                {{ form.email|as_crispy_field }}
+            </div>
+            <div class='col-6'>
+                {{ form.first_name|as_crispy_field }}
+            </div>
+            <div class='col-6'>
+                {{ form.last_name|as_crispy_field }}
             </div>
         </div>
-        <div class="col-9 bg-primary">
-
-        </div>
-    </div>
+        <button class='btn btn-success'>ذخیره</button>
+    </form>
 {% endblock  %}

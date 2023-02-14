@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from .models import User
 from .forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import Group
-# UserAdmin.fieldsets[0][1]["fields"] = ("phone_number", "username", "password")
+# UserAdmin.fieldsets[0][1]["fields"] = ("username", "username", "password")
 # UserAdmin.fieldsets[2][1]["fields"] = (
 #                     "is_active",
 #                     "is_staff",
@@ -15,7 +15,7 @@ from django.contrib.auth.models import Group
 #                     "user_permissions",
 #                 )
 
-# UserAdmin.list_display = ("phone_number", "username", "email", "first_name", "last_name", "is_active", "is_special")
+# UserAdmin.list_display = ("username", "username", "email", "first_name", "last_name", "is_active", "is_special")
 
 
 
@@ -26,7 +26,7 @@ class AccountUserAdmin(UserAdmin):
     add_form = UserCreationForm
 
     fieldsets = (
-        (None, {"fields": ("phone_number", "password")}),
+        (None, {"fields": ("username", "password")}),
         (_("Personal info"), {"fields": ("first_name", "last_name", "email")}),
         (
             _("Permissions"),
@@ -43,8 +43,8 @@ class AccountUserAdmin(UserAdmin):
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
 
-    list_display = ('phone_number', 'first_name', 'last_name', 'email', 'date_joined', 'last_login', 'is_active')
-    list_display_links = ('phone_number',)
+    list_display = ('username', 'first_name', 'last_name', 'email', 'date_joined', 'last_login', 'is_active')
+    list_display_links = ('username',)
     readonly_fields = ('last_login', 'date_joined')
     ordering = ('-date_joined',)
 

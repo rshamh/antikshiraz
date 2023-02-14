@@ -5,12 +5,12 @@ from django.core.validators import RegexValidator
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, phone_number, password=None):
-        if not phone_number:
+    def create_user(self, username, password=None):
+        if not username:
             raise ValueError('کاربر باید شماره موبایل خود را وارد کند')
 
         user = self.model(
-            phone_number = phone_number,
+            username = username,
             
             # first_name = first_name,
             # last_name = last_name,
@@ -21,9 +21,9 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, phone_number, email, password=None):
+    def create_superuser(self, username, email, password=None):
         user = self.create_user(
-            phone_number = phone_number,
+            username = username,
             email = email,
             # first_name = first_name,
             # last_name = last_name,
@@ -39,7 +39,7 @@ class MyUserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     phone_regex = RegexValidator(regex=r'^09?\d{9}$', message="Phone number must be entered in the format: '09*********'. Up to 11 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=11, blank=False, unique=True, verbose_name='شماره تماس') # Validators should be a list
+    username = models.CharField(validators=[phone_regex], max_length=11, blank=False, unique=True, verbose_name='شماره تماس') # Validators should be a list
     
 
     first_name = models.CharField(max_length=50, verbose_name='نام')
@@ -65,7 +65,7 @@ class User(AbstractBaseUser):
     is_special.boolian = True
     is_special.short_description = 'کاربر ویژه'
 
-    USERNAME_FIELD = 'phone_number'
+    USERNAME_FIELD = 'username'
 
     # A list of the field names that will be prompted for when creating a user via the createsuperuser management command.
     REQUIRED_FIELDS = ['email']  
@@ -73,17 +73,13 @@ class User(AbstractBaseUser):
     objects = MyUserManager()
 
     def __str__(self):
-        return self.phone_number
+        return self.username
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
 
     def has_module_perms(self, add_label):
         return True
-
-    @property
-    def username(self):
-        return self.phone_number
 
     def get_full_name(self):
         """

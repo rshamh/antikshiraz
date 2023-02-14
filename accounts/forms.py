@@ -18,7 +18,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('phone_number',)
+        fields = ('username',)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -42,8 +42,15 @@ class UserChangeForm(forms.ModelForm):
     the user, but replaces the password field with admin's
     disabled password hash display field.
     """
+    
+    def __init__(self, *args, **kwargs):
+        super(UserChangeForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].disabled = True
+        self.fields['email'].required = False
+
     password = ReadOnlyPasswordHashField()
 
     class Meta:
         model = User
-        fields = ('phone_number', 'email', 'password', 'is_active', 'is_admin')
+        fields = ('username', 'email', 'password', 'first_name', 'last_name')
