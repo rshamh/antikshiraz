@@ -105,14 +105,17 @@ class Product(models.Model):
     
 
     def jpublish(self):
+        '''Convert Gorgian date format to Jalali'''
         return jalali_converter(self.publish)
     jpublish.short_description = 'زمان انتشار'
     
     
     def p_title(self):
+        '''Convert numbers in title to persian characters'''
         return persian_number_conv(str(self.title))
 
     def p_price(self):
+        '''separate price by , for each thousands then convert it to persian characters'''
         str_price = str(self.price)[::-1]
         new_price = ''
         for i in range(len(str_price)):
@@ -128,6 +131,7 @@ class Product(models.Model):
     thumbnail_tag.short_description = 'عکس'
 
     def is_available(self):
+        '''Check if that product available or not'''
         if self.stock > 0:
             return True
         else:

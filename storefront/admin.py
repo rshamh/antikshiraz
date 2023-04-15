@@ -16,9 +16,11 @@ class ProductAdmin(admin.ModelAdmin):
     list_per_page = 25
 
     def category_to_str(self, obj):
+            '''return all categories blong to that product'''
             return '، '.join(category.title for category in obj.category.all())
     category_to_str.short_description = 'دسته بندی'
 
+    # Actions:
     @admin.action(description='انتشار محصولات انتخاب شده')
     def make_published(self, request, queryset):
         updated = queryset.update(status=True)
@@ -49,6 +51,7 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     actions = ['make_published', 'make_draft']
 
+    # Actions:
     @admin.action(description='انتشار دسته بندی انتخاب شده')
     def make_published(self, request, queryset):
         updated = queryset.update(status=True)
