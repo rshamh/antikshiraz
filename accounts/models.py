@@ -38,6 +38,10 @@ class MyUserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    '''
+    In this custum User model, phone number is used as the username,
+    and validates with RegexValidator due to Iran's phone number format.
+    '''
     phone_regex = RegexValidator(regex=r'^09?\d{9}$', message="Phone number must be entered in the format: '09*********'. Up to 11 digits allowed.")
     username = models.CharField(validators=[phone_regex], max_length=11, blank=False, unique=True, verbose_name='شماره تماس') # Validators should be a list
     
