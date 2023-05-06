@@ -22,6 +22,7 @@ urlpatterns = [
     path('profile/', include('accounts.urls')),
     path('adminpanel/', include('shopadmin.urls')),
     path('cart/', include('cart.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 from django.conf import settings
